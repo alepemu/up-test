@@ -2,33 +2,40 @@ import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import { useEffect, useState, Dispatch, SetStateAction } from "react";
 
-
 interface LocationObject {
-  lat: number, lon: number
+  latitude: number;
+  longitude: number;
 }
 
 interface LocationInputProps {
-  location: LocationObject,
+  location: LocationObject;
   setLocation: Dispatch<SetStateAction<LocationObject>>;
 }
 
 function LocationInput({ location, setLocation }: LocationInputProps) {
-  // const [location, setLocation] = useState({ lat: 0, lon: 0 })
-  const [latitude, setLatitude] = useState(0)
-  const [longitude, setLongitude] = useState(0)
+  // const [coordinates, setCoordinates] = useState({
+  //   latitude: 0,
+  //   longitude: 0,
+  // });
+  const [latitude, setLatitude] = useState(0);
+  const [longitude, setLongitude] = useState(0);
 
   useEffect(() => {
-    setLatitude(location.lat)
-    setLongitude(location.lon)
-  }, [location])
+    setLatitude(location.latitude);
+    setLongitude(location.longitude);
+    // setCoordinates({
+    //   latitude: location.latitude,
+    //   longitude: location.longitude,
+    // });
+  }, [location]);
 
   const handleLatitude = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setLatitude(+event.target.value)
-  }
+    setLatitude(+event.target.value);
+  };
 
   const handleLongitude = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setLongitude(+event.target.value)
-  }
+    setLongitude(+event.target.value);
+  };
 
   // const handleLocation = (event: Event, value: number) => {
   //   setLocation({ lat: value, lon: 0 })
@@ -49,11 +56,21 @@ function LocationInput({ location, setLocation }: LocationInputProps) {
       <div id="location-input" className="flex">
         <div className="w-1/2">
           <Label htmlFor="latitude">LATITUDE</Label>
-          <Input type="number" id="latitude" value={latitude} onChange={(event) => handleLatitude(event)} />
+          <Input
+            type="number"
+            id="latitude"
+            value={latitude}
+            onChange={(event) => handleLatitude(event)}
+          />
         </div>
         <div className="w-1/2">
           <Label htmlFor="longitude">LONGITUDE</Label>
-          <Input type="number" id="longitude" value={longitude} onChange={(event) => handleLongitude(event)} />
+          <Input
+            type="number"
+            id="longitude"
+            value={longitude}
+            onChange={(event) => handleLongitude(event)}
+          />
         </div>
       </div>
     </div>

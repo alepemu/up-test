@@ -4,10 +4,10 @@ import Navbar from "./components/Navbar";
 import { useState } from "react";
 
 function App() {
-  const [areaTab, setAreaTab] = useState(true)
+  const [areaTab, setAreaTab] = useState(true);
 
   return (
-    <div className="bg-slate-900">
+    <div className="h-screen bg-slate-900">
       <div className="relative bg-white mx-auto h-screen w-[500px] p-6">
         {areaTab ? <Area /> : <Weather />}
         <Navbar setAreaTab={setAreaTab} />

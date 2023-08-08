@@ -1,23 +1,33 @@
-import { useState } from "react"
+import { useState } from "react";
 import { Progress } from "./ui/progress";
 import { Separator } from "./ui/separator";
-import { MapPin } from 'lucide-react';
-import { Sun, CloudFog, CloudSun, Cloudy, CloudDrizzle, CloudRain, CloudRainWind, CloudSunRain, CloudSnow } from 'lucide-react';
+import { MapPin } from "lucide-react";
+import {
+  Sun,
+  CloudFog,
+  CloudSun,
+  Cloudy,
+  CloudDrizzle,
+  CloudRain,
+  CloudRainWind,
+  CloudSunRain,
+  CloudSnow,
+} from "lucide-react";
 
 const initialWeatherState = {
-  location: 'Barcelona',
-  weather: 'clouds',
-  description: 'few clouds 11-25%',
-  sunset: '21:00',
-  sunrise: '07:00',
-  temperature: '31.34',
-  feels: '34.1254',
-  humidity: '70'
-}
+  location: "Barcelona",
+  weather: "clouds",
+  description: "few clouds 11-25%",
+  sunset: "21:00",
+  sunrise: "07:00",
+  temperature: "31.34",
+  feels: "34.1254",
+  humidity: "70",
+};
 
 function WeatherCard() {
-  const [city, setCity] = useState('Badalona')
-  const [weather, setWeather] = useState(initialWeatherState)
+  const [city, setCity] = useState("Badalona");
+  const [weather, setWeather] = useState(initialWeatherState);
 
   return (
     <>
@@ -71,8 +81,7 @@ function WeatherCard() {
           <p>{weather.humidity}% humidity</p>
           <Progress value={+weather.humidity} />
         </div>
-      </div >
-
+      </div>
     </>
   );
 }
