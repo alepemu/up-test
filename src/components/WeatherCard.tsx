@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, Dispatch, SetStateAction, useEffect } from "react";
 import { Progress } from "./ui/progress";
 import { Separator } from "./ui/separator";
 import { MapPin } from "lucide-react";
@@ -14,20 +14,72 @@ import {
   CloudSnow,
 } from "lucide-react";
 
+interface WeatherApiResponse {
+  cod: number;
+  main: {
+    feels_like: number;
+    humidity: number;
+    temp: number;
+  };
+  sys: {
+    sunrise: number;
+    sunset: number;
+  };
+  weather: [
+    {
+      description: string;
+      main: string;
+    }
+  ];
+}
+
 const initialWeatherState = {
-  location: "Barcelona",
-  weather: "clouds",
-  description: "few clouds 11-25%",
-  sunset: "21:00",
-  sunrise: "07:00",
-  temperature: "31.34",
-  feels: "34.1254",
-  humidity: "70",
+  cod: 0,
+  main: {
+    feels_like: 34.1254,
+    humidity: 70,
+    temp: 31.34,
+  },
+  sys: {
+    sunrise: 2100,
+    sunset: 700,
+  },
+  weather: [
+    {
+      description: "few clouds 11-25%",
+      main: "clouds",
+    },
+  ],
 };
 
-function WeatherCard() {
-  const [city, setCity] = useState("Badalona");
+interface cityProps {
+  name: string;
+  coordinates: number[];
+}
+
+interface citySelectorProps {
+  city: cityProps;
+}
+
+const APIKey = "249efd60e5021ba25f979f2caac2b853";
+
+function WeatherCard({ city }: citySelectorProps) {
   const [weather, setWeather] = useState(initialWeatherState);
+
+  useEffect(() => {
+    console.log("city changed in card");
+    console.log(city);
+    // if (city.name === "a") {
+    fetch(
+      `https://api.openweathermap.org/data/2.5/weather?lat=${city.coordinates[1]}&lon=${city.coordinates[0]}&appid=${APIKey}`
+    )
+      .then((response) => response.json())
+      .then((response) => {
+        console.log(response);
+        setWeather(response);
+      });
+    // }
+  }, [city]);
 
   return (
     <>
@@ -38,11 +90,11 @@ function WeatherCard() {
           </div>
           <div id="weather-type">
             <p>WEATHER</p>
-            <p>{weather.weather}</p>
+            <p>{weather.weather[0].main}</p>
           </div>
           <div id="weather-desc">
             <p>DESCRIPTION</p>
-            <p>{weather.description}</p>
+            <p>{weather.weather[0].description}</p>
           </div>
         </div>
 
@@ -51,17 +103,17 @@ function WeatherCard() {
         <div id="weather-sun-city" className="flex gap-4">
           <div id="sunset-time">
             <p>SUNSET</p>
-            <p>{weather.sunset}</p>
+            <p>{weather.sys.sunset}</p>
           </div>
           <div id="sunrise-time">
             <p>SUNRISE</p>
-            <p>{weather.sunrise}</p>
+            <p>{weather.sys.sunrise}</p>
           </div>
           <div id="location-card">
             <p>LOCATION</p>
             <div className="flex">
               <MapPin />
-              <p>{weather.location}</p>
+              <p>{city.name}</p>
             </div>
           </div>
         </div>
@@ -69,17 +121,19 @@ function WeatherCard() {
         <div id="weather-temperature" className="flex gap-4">
           <div id="temp-real">
             <p>TEMPERATURE</p>
-            <p>{weather.temperature}</p>
+            <p>{Math.round(((weather.main.temp - 273.15) * 100) / 100)}</p>
           </div>
           <div id="temp-feel">
             <p>FEELS LIKE</p>
-            <p>{weather.feels}</p>
+            <p>
+              {Math.round(((weather.main.feels_like - 273.15) * 100) / 100)}
+            </p>
           </div>
         </div>
 
         <div id="weather-humidity" className="flex flex-col gap-1 items-end">
-          <p>{weather.humidity}% humidity</p>
-          <Progress value={+weather.humidity} />
+          <p>{weather.main.humidity}% humidity</p>
+          <Progress value={weather.main.humidity} />
         </div>
       </div>
     </>

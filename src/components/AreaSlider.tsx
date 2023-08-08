@@ -1,9 +1,11 @@
 import { Slider } from "./ui/slider";
-import { useEffect, useState, Dispatch, SetStateAction } from "react";
+import { useState, Dispatch, SetStateAction } from "react";
 import Leaflet from "leaflet";
-import { MapContainer, TileLayer, Marker, Circle } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Circle, useMap } from "react-leaflet";
 // @ts-ignore
 import iconUrl from "../svg/map_pin.svg";
+import RecenterAutomatically from "./Recenter";
+import Rezoom from "./Rezoom";
 
 const newicon = new Leaflet.Icon({
   iconUrl,
@@ -26,10 +28,6 @@ function AreaSlider({ location, setLocation }: LocationInputProps) {
   const handleArea = (value: number[]) => {
     setArea(value[0]);
   };
-
-  useEffect(() => {
-    console.log("actualizado", location);
-  }, [location]);
 
   return (
     <div className="flex flex-col gap-4">
@@ -68,9 +66,14 @@ function AreaSlider({ location, setLocation }: LocationInputProps) {
             ></Marker>
             <Circle
               center={[location.latitude, location.longitude]}
-              pathOptions={{ fillColor: "black" }}
+              pathOptions={{ color: "black", weight: 1 }}
               radius={(area * 1000) / 2}
             />
+            <RecenterAutomatically
+              lat={location.latitude}
+              lng={location.longitude}
+            />
+            <Rezoom zoom={14 - area / 2} />
           </MapContainer>
         </div>
       </div>

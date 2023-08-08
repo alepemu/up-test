@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { Check, ChevronsUpDown } from "lucide-react";
 
 import { cn } from "../lib/utils";
@@ -19,9 +19,18 @@ import {
 
 import locations from "../mocks/test_locations.json";
 
-function CitySelector() {
+interface cityProps {
+  name: string;
+  coordinates: number[];
+}
+
+interface citySelectorProps {
+  city: cityProps;
+  setCity: Dispatch<SetStateAction<cityProps>>;
+}
+
+function CitySelector({ city, setCity }: citySelectorProps) {
   const [open, setOpen] = useState(false);
-  const [city, setCity] = useState("");
 
   return (
     <div id="location" className="flex flex-col gap-2">
@@ -36,7 +45,7 @@ function CitySelector() {
           >
             {city
               ? locations.find(
-                  (location) => location.city.toLowerCase() === city
+                  (location) => location.city.toLowerCase() === city.name
                 )?.city
               : "Select location..."}
             <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
@@ -51,14 +60,21 @@ function CitySelector() {
                 <CommandItem
                   key={location.id}
                   onSelect={(currentCity) => {
-                    setCity(currentCity === city ? "" : currentCity);
+                    setCity({
+                      name: currentCity === city.name ? "" : currentCity,
+                      coordinates: [
+                        location.location.coordinates[1],
+                        location.location.coordinates[0],
+                      ],
+                    });
+
                     setOpen(false);
                   }}
                 >
                   <Check
                     className={cn(
                       "mr-2 h-4 w-4",
-                      city === location.city.toLowerCase()
+                      city.name === location.city.toLowerCase()
                         ? "opacity-100"
                         : "opacity-0"
                     )}
