@@ -1,8 +1,8 @@
-import { Label } from "@radix-ui/react-label";
-import { Input } from "../components/ui/input";
+import { Label } from "./ui/label";
+import { Input } from "./ui/input";
 import { useEffect, useState } from "react";
 
-function Location() {
+function LocationInput() {
   // const [location, setLocation] = useState({ lat: 0, lon: 0 })
   const [latitude, setLatitude] = useState(0)
   const [longitude, setLongitude] = useState(0)
@@ -45,4 +45,4 @@ function Location() {
   );
 }
 
-export default Location;
+export default LocationInput;

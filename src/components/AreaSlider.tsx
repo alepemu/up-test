@@ -1,7 +1,7 @@
-import { Slider } from "../components/ui/slider"
+import { Slider } from "./ui/slider"
 import { useEffect, useState } from "react";
 
-function Area() {
+function AreaSlider() {
   const [area, setArea] = useState(1)
 
   const handleArea = (value: number[]) => {
@@ -33,4 +33,4 @@ function Area() {
   );
 }
 
-export default Area;
+export default AreaSlider;
