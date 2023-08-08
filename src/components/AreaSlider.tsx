@@ -8,9 +8,9 @@ function AreaSlider() {
     setArea(value[0]);
   };
 
-  useEffect(() => {
-    console.log('area', area);
-  }, [area])
+  // useEffect(() => {
+  //   console.log('area', area);
+  // }, [area])
 
   return (
     <div className="flex flex-col gap-4">
