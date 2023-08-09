@@ -63,6 +63,8 @@ function WeatherCard({ city }: citySelectorProps) {
 
   useEffect(() => {
     if (city.name !== "") {
+      console.log("city", city);
+
       fetch(
         `https://api.openweathermap.org/data/2.5/weather?lat=${city.coordinates[0]}&lon=${city.coordinates[1]}&appid=${APIKey}&units=metric`
       )
@@ -99,7 +101,7 @@ function WeatherCard({ city }: citySelectorProps) {
 
   return (
     <>
-      <div className="flex flex-col gap-2 p-4 rounded-md border-2 border-sky-400">
+      <div className="flex flex-col gap-4 p-4 rounded-xl border-2 border-sky-400 text-lg">
         <div id="weather-current" className="flex items-center gap-4">
           <div className="flex items-center w-10 h-10 rounded-full border-2">
             <img
@@ -111,11 +113,11 @@ function WeatherCard({ city }: citySelectorProps) {
             ></img>
           </div>
           <div id="weather-type">
-            <p>WEATHER</p>
+            <p className="text-xs">WEATHER</p>
             <p>{weather.weather[0].main}</p>
           </div>
           <div id="weather-desc">
-            <p>DESCRIPTION</p>
+            <p className="text-xs">DESCRIPTION</p>
             <p>{weather.weather[0].description}</p>
           </div>
         </div>
@@ -123,36 +125,38 @@ function WeatherCard({ city }: citySelectorProps) {
         <Separator />
 
         <div id="weather-sun-city" className="flex gap-4">
-          <div id="sunset-time">
-            <p>SUNSET</p>
+          <div id="sunset-time" className="w-3/12">
+            <p className="text-xs">SUNSET</p>
             <p>{sunset}</p>
           </div>
-          <div id="sunrise-time">
-            <p>SUNRISE</p>
+          <div id="sunrise-time" className="w-3/12">
+            <p className="text-xs">SUNRISE</p>
             <p>{sunrise}</p>
           </div>
-          <div id="location-card">
-            <p>LOCATION</p>
-            <div className="flex">
-              <MapPin />
-              <p>{city.name || "-"}</p>
+          <div id="location-card" className="w-6/12">
+            <p className="text-xs">LOCATION</p>
+            <div className="flex items-center gap-1">
+              <MapPin size={20} />
+              <p>
+                {city.name.charAt(0).toUpperCase() + city.name.slice(1) || "-"}
+              </p>
             </div>
           </div>
         </div>
 
         <div id="weather-temperature" className="flex gap-4">
-          <div id="temp-real">
-            <p>TEMPERATURE</p>
+          <div id="temp-real" className="w-2/6">
+            <p className="text-xs">TEMPERATURE</p>
             <p>{Math.round(weather.main.temp * 100) / 100}</p>
           </div>
-          <div id="temp-feel">
-            <p>FEELS LIKE</p>
+          <div id="temp-feel" className="w-2/6">
+            <p className="text-xs">FEELS LIKE</p>
             <p>{Math.round(weather.main.feels_like * 100) / 100}</p>
           </div>
         </div>
 
         <div id="weather-humidity" className="flex flex-col gap-1 items-end">
-          <p>{weather.main.humidity}% humidity</p>
+          <p className="text-xs">{weather.main.humidity}% humidity</p>
           <Progress value={weather.main.humidity} />
         </div>
       </div>

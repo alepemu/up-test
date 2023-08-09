@@ -28,7 +28,7 @@ function Navbar({ areaTab, setAreaTab }: NavbarProps) {
         <div
           id="dot"
           className={`absolute bottom-3 h-[5px] w-[5px] bg-sky-400 rounded-full ${
-            areaTab ? "-translate-x-16" : "translate-x-16"
+            areaTab ? "-translate-x-[65px]" : "translate-x-[65px]"
           } transition-all ease-in-out duration-200`}
         ></div>
       </div>
