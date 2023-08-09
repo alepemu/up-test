@@ -1,9 +1,9 @@
 # up-test
 
-### `npm start`
+### Get started
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Check this on [https://up-test-delta.vercel.app](https://up-test-delta.vercel.app)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- Or clone the repository and run the app in the development mode with `npm start`, then open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+
+### Screenshots

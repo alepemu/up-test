@@ -54,7 +54,7 @@ interface citySelectorProps {
   city: cityProps;
 }
 
-const APIKey = "249efd60e5021ba25f979f2caac2b853";
+const APIKey = process.env.REACT_APP_API_KEY;
 
 function WeatherCard({ city }: citySelectorProps) {
   const [weather, setWeather] = useState(initialWeatherState);
