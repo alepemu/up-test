@@ -69,8 +69,12 @@ function AreaSlider({ location }: LocationInputProp) {
               pathOptions={{ color: "#38bdf8", weight: 2 }}
               radius={(area * 1000) / 2}
             />
-            <Recenter lat={location.latitude} lng={location.longitude} />
-            <Rezoom area={area} lat={location.latitude} />
+            <Recenter lat={location.latitude} lon={location.longitude} />
+            <Rezoom
+              area={area}
+              lat={location.latitude}
+              lon={location.longitude}
+            />
           </MapContainer>
         </div>
       </div>

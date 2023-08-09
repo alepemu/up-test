@@ -3,14 +3,14 @@ import { useMap } from "react-leaflet";
 
 interface RecenterProps {
   lat: number;
-  lng: number;
+  lon: number;
 }
 
-const RecenterAutomatically = ({ lat, lng }: RecenterProps) => {
+const RecenterAutomatically = ({ lat, lon }: RecenterProps) => {
   const map = useMap();
   useEffect(() => {
-    map.setView([lat, lng]);
-  }, [lat, lng]);
+    map.setView([lat, lon]);
+  }, [lat, lon]);
   return null;
 };
 

@@ -2,13 +2,13 @@ import LocationInput from "../components/LocationInput";
 import AreaSlider from "../components/AreaSlider";
 import { useState, useEffect } from "react";
 
-const initialLocation = { latitude: 51.5072, longitude: 0.1276 };
+const initialLocation = { latitude: 0, longitude: 0 };
 
 function Area() {
   const [location, setLocation] = useState(initialLocation);
 
   useEffect(() => {
-    if (location === initialLocation) {
+    if (location.latitude === 0) {
       navigator.geolocation.getCurrentPosition(function (position) {
         setLocation({
           latitude: position.coords.latitude,
