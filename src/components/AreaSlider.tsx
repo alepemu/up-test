@@ -1,15 +1,22 @@
 import { Slider } from "./ui/slider";
-import { useState, Dispatch, SetStateAction } from "react";
+import { useState, Dispatch, SetStateAction, useEffect } from "react";
 import Leaflet from "leaflet";
-import { MapContainer, TileLayer, Marker, Circle, useMap } from "react-leaflet";
+import {
+  MapContainer,
+  TileLayer,
+  Marker,
+  Circle,
+  useMap,
+  CircleMarker,
+} from "react-leaflet";
 // @ts-ignore
 import iconUrl from "../svg/map_pin.svg";
 import RecenterAutomatically from "./Recenter";
 import Rezoom from "./Rezoom";
 
-const newicon = new Leaflet.Icon({
+const mapPin = new Leaflet.Icon({
   iconUrl,
-  iconSize: [25, 55],
+  iconSize: [30, 30],
 });
 
 interface LocationObject {
@@ -25,6 +32,13 @@ interface LocationInputProps {
 function AreaSlider({ location, setLocation }: LocationInputProps) {
   const [area, setArea] = useState(1);
 
+  // useEffect(() => {
+  //   const zoom = map.getZoom();
+  //   const lat = map.getCenter().lat;
+  //   const metersPerPixel =
+  //     (156543.03392 * Math.cos((lat * Math.PI) / 180)) / Math.pow(2, zoom);
+  // }, [area]);
+
   const handleArea = (value: number[]) => {
     setArea(value[0]);
   };
@@ -34,7 +48,7 @@ function AreaSlider({ location, setLocation }: LocationInputProps) {
       <div id="area" className="flex flex-col gap-2">
         <div id="area-title" className="flex justify-between items-end">
           <h4 className="text-xl font-bold">Area</h4>
-          <p className="text-xs text-gray-500">max 20 km</p>
+          <p className="text-xs text-gray-500">{area} km ⌀ (max 20)</p>
         </div>
         <div id="area-input" className="w-full h-8 flex">
           <Slider
@@ -52,7 +66,8 @@ function AreaSlider({ location, setLocation }: LocationInputProps) {
           <MapContainer
             className="w-full h-full"
             center={[location.latitude, location.longitude]}
-            zoom={14}
+            zoomSnap={0.05}
+            zoom={14.5}
             scrollWheelZoom={false}
             attributionControl={false}
           >
@@ -62,18 +77,23 @@ function AreaSlider({ location, setLocation }: LocationInputProps) {
             />
             <Marker
               position={[location.latitude, location.longitude]}
-              icon={newicon}
+              icon={mapPin}
             ></Marker>
             <Circle
               center={[location.latitude, location.longitude]}
-              pathOptions={{ color: "black", weight: 1 }}
+              pathOptions={{ color: "#38bdf8", weight: 2 }}
               radius={(area * 1000) / 2}
             />
+            {/* <CircleMarker
+              center={[location.latitude, location.longitude]}
+              pathOptions={{ color: "black", weight: 1 }}
+              radius={50}
+            /> */}
             <RecenterAutomatically
               lat={location.latitude}
               lng={location.longitude}
             />
-            <Rezoom zoom={14 - area / 2} />
+            <Rezoom area={area} lat={location.latitude} />
           </MapContainer>
         </div>
       </div>

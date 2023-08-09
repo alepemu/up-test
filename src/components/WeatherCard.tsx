@@ -66,24 +66,24 @@ const APIKey = "249efd60e5021ba25f979f2caac2b853";
 function WeatherCard({ city }: citySelectorProps) {
   const [weather, setWeather] = useState(initialWeatherState);
 
-  useEffect(() => {
-    console.log("city changed in card");
-    console.log(city);
-    // if (city.name === "a") {
-    fetch(
-      `https://api.openweathermap.org/data/2.5/weather?lat=${city.coordinates[1]}&lon=${city.coordinates[0]}&appid=${APIKey}`
-    )
-      .then((response) => response.json())
-      .then((response) => {
-        console.log(response);
-        setWeather(response);
-      });
-    // }
-  }, [city]);
+  // useEffect(() => {
+  //   console.log("city changed in card");
+  //   console.log(city);
+  //   // if (city.name === "a") {
+  //   fetch(
+  //     `https://api.openweathermap.org/data/2.5/weather?lat=${city.coordinates[1]}&lon=${city.coordinates[0]}&appid=${APIKey}`
+  //   )
+  //     .then((response) => response.json())
+  //     .then((response) => {
+  //       console.log(response);
+  //       setWeather(response);
+  //     });
+  //   // }
+  // }, [city]);
 
   return (
     <>
-      <div className="flex flex-col gap-2 p-4 rounded-md border-2 border-blue-300">
+      <div className="flex flex-col gap-2 p-4 rounded-md border-2 border-sky-400">
         <div id="weather-current" className="flex items-center gap-4">
           <div className="flex items-center w-10 h-10 rounded-full border-2">
             <Cloudy className="mx-auto align-middle" />

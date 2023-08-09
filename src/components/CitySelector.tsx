@@ -38,12 +38,12 @@ function CitySelector({ city, setCity }: citySelectorProps) {
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <Button
-            // variant="outline"
+            variant="outline"
             role="combobox"
             aria-expanded={open}
             className="w-full justify-between"
           >
-            {city
+            {city.name !== ""
               ? locations.find(
                   (location) => location.city.toLowerCase() === city.name
                 )?.city

@@ -8,9 +8,9 @@ function App() {
 
   return (
     <div className="h-screen bg-slate-900">
-      <div className="relative bg-white mx-auto h-screen w-[500px] p-6">
+      <div className="relative bg-white mx-auto h-screen w-screen min-[500px]:w-[500px] p-6">
         {areaTab ? <Area /> : <Weather />}
-        <Navbar setAreaTab={setAreaTab} />
+        <Navbar areaTab={areaTab} setAreaTab={setAreaTab} />
       </div>
     </div>
   );

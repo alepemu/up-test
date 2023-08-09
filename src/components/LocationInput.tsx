@@ -28,8 +28,10 @@ function LocationInput({ location, setLocation }: LocationInputProps) {
         <div className="w-1/2">
           <Label htmlFor="latitude">LATITUDE</Label>
           <Input
-            type="number"
             id="latitude"
+            type="number"
+            min={-90}
+            max={90}
             value={location.latitude}
             onChange={(event) => handleLatitude(event)}
           />
@@ -37,8 +39,10 @@ function LocationInput({ location, setLocation }: LocationInputProps) {
         <div className="w-1/2">
           <Label htmlFor="longitude">LONGITUDE</Label>
           <Input
-            type="number"
             id="longitude"
+            type="number"
+            min={-180}
+            max={180}
             value={location.longitude}
             onChange={(event) => handleLongitude(event)}
           />

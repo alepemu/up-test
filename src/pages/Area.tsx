@@ -16,7 +16,7 @@ function Area() {
         });
       });
     } else {
-      console.log("loc", location);
+      // console.log("loc", location);
     }
   }, [location]);
 
