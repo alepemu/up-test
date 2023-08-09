@@ -3,26 +3,26 @@ import { Progress } from "./ui/progress";
 import { Separator } from "./ui/separator";
 import { MapPin } from "lucide-react";
 
-interface WeatherApiResponse {
-  cod: number;
-  main: {
-    feels_like: number;
-    humidity: number;
-    temp: number;
-  };
-  name: string;
-  sys: {
-    sunrise: number;
-    sunset: number;
-  };
-  weather: [
-    {
-      description: string;
-      icon: number;
-      main: string;
-    }
-  ];
-}
+// interface WeatherApiResponse {
+//   cod: number;
+//   main: {
+//     feels_like: number;
+//     humidity: number;
+//     temp: number;
+//   };
+//   name: string;
+//   sys: {
+//     sunrise: number;
+//     sunset: number;
+//   };
+//   weather: [
+//     {
+//       description: string;
+//       icon: number;
+//       main: string;
+//     }
+//   ];
+// }
 
 const initialWeatherState = {
   cod: 0,
@@ -63,8 +63,6 @@ function WeatherCard({ city }: citySelectorProps) {
 
   useEffect(() => {
     if (city.name !== "") {
-      console.log("city", city);
-
       fetch(
         `https://api.openweathermap.org/data/2.5/weather?lat=${city.coordinates[0]}&lon=${city.coordinates[1]}&appid=${APIKey}&units=metric`
       )
@@ -101,7 +99,7 @@ function WeatherCard({ city }: citySelectorProps) {
 
   return (
     <>
-      <div className="flex flex-col gap-4 p-4 rounded-xl border-2 border-sky-400 text-lg">
+      <div className="flex flex-col gap-4 p-4 rounded-lg border-2 border-sky-400 text-lg">
         <div id="weather-current" className="flex items-center gap-4">
           <div className="flex items-center w-10 h-10 rounded-full border-2">
             <img
@@ -136,7 +134,7 @@ function WeatherCard({ city }: citySelectorProps) {
           <div id="location-card" className="w-6/12">
             <p className="text-xs">LOCATION</p>
             <div className="flex items-center gap-1">
-              <MapPin size={20} />
+              <MapPin size={20} className="opacity-70" />
               <p>
                 {city.name.charAt(0).toUpperCase() + city.name.slice(1) || "-"}
               </p>

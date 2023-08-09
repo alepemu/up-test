@@ -1,5 +1,5 @@
 import { Label } from "./ui/label";
-import { Input } from "./ui/input";
+import { InputL, InputR } from "./ui/input";
 import { Dispatch, SetStateAction } from "react";
 
 interface LocationObject {
@@ -13,12 +13,11 @@ interface LocationInputProps {
 }
 
 function LocationInput({ location, setLocation }: LocationInputProps) {
-  const handleLatitude = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setLocation({ ...location, latitude: +event.target.value });
-  };
-
-  const handleLongitude = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setLocation({ ...location, longitude: +event.target.value });
+  const handleChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+    parameter: string
+  ) => {
+    setLocation({ ...location, [parameter]: +event.target.value });
   };
 
   return (
@@ -26,25 +25,29 @@ function LocationInput({ location, setLocation }: LocationInputProps) {
       <h4 className="text-xl font-bold">Location</h4>
       <div id="location-input" className="flex">
         <div className="w-1/2">
-          <Label htmlFor="latitude">LATITUDE</Label>
-          <Input
+          <Label htmlFor="latitude" className="text-xs">
+            LATITUDE
+          </Label>
+          <InputL
             id="latitude"
             type="number"
             min={-90}
             max={90}
             value={location.latitude}
-            onChange={(event) => handleLatitude(event)}
+            onChange={(event) => handleChange(event, "latitude")}
           />
         </div>
         <div className="w-1/2">
-          <Label htmlFor="longitude">LONGITUDE</Label>
-          <Input
+          <Label htmlFor="longitude" className="text-xs">
+            LONGITUDE
+          </Label>
+          <InputR
             id="longitude"
             type="number"
             min={-180}
             max={180}
             value={location.longitude}
-            onChange={(event) => handleLongitude(event)}
+            onChange={(event) => handleChange(event, "longitude")}
           />
         </div>
       </div>

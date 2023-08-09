@@ -15,8 +15,6 @@ function Area() {
           longitude: position.coords.longitude,
         });
       });
-    } else {
-      // console.log("loc", location);
     }
   }, [location]);
 
@@ -24,7 +22,7 @@ function Area() {
     <div className="flex flex-col gap-4">
       <h2 className="text-2xl font-bold text-center">Area selector</h2>
       <LocationInput location={location} setLocation={setLocation} />
-      <AreaSlider location={location} setLocation={setLocation} />
+      <AreaSlider location={location} />
     </div>
   );
 }

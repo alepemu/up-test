@@ -1,22 +1,15 @@
 import { Slider } from "./ui/slider";
-import { useState, Dispatch, SetStateAction, useEffect } from "react";
+import { useState } from "react";
 import Leaflet from "leaflet";
-import {
-  MapContainer,
-  TileLayer,
-  Marker,
-  Circle,
-  useMap,
-  CircleMarker,
-} from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Circle } from "react-leaflet";
 // @ts-ignore
-import iconUrl from "../svg/map_pin.svg";
-import RecenterAutomatically from "./Recenter";
-import Rezoom from "./Rezoom";
+import iconUrl from "../svg/map_pin_blue.svg";
+import Recenter from "./map/Recenter";
+import Rezoom from "./map/Rezoom";
 
 const mapPin = new Leaflet.Icon({
   iconUrl,
-  iconSize: [30, 30],
+  iconSize: [35, 35],
 });
 
 interface LocationObject {
@@ -24,20 +17,12 @@ interface LocationObject {
   longitude: number;
 }
 
-interface LocationInputProps {
+interface LocationInputProp {
   location: LocationObject;
-  setLocation: Dispatch<SetStateAction<LocationObject>>;
 }
 
-function AreaSlider({ location, setLocation }: LocationInputProps) {
+function AreaSlider({ location }: LocationInputProp) {
   const [area, setArea] = useState(1);
-
-  // useEffect(() => {
-  //   const zoom = map.getZoom();
-  //   const lat = map.getCenter().lat;
-  //   const metersPerPixel =
-  //     (156543.03392 * Math.cos((lat * Math.PI) / 180)) / Math.pow(2, zoom);
-  // }, [area]);
 
   const handleArea = (value: number[]) => {
     setArea(value[0]);
@@ -84,15 +69,7 @@ function AreaSlider({ location, setLocation }: LocationInputProps) {
               pathOptions={{ color: "#38bdf8", weight: 2 }}
               radius={(area * 1000) / 2}
             />
-            {/* <CircleMarker
-              center={[location.latitude, location.longitude]}
-              pathOptions={{ color: "black", weight: 1 }}
-              radius={50}
-            /> */}
-            <RecenterAutomatically
-              lat={location.latitude}
-              lng={location.longitude}
-            />
+            <Recenter lat={location.latitude} lng={location.longitude} />
             <Rezoom area={area} lat={location.latitude} />
           </MapContainer>
         </div>

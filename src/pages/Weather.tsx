@@ -1,6 +1,6 @@
 import CitySelector from "../components/CitySelector";
 import WeatherCard from "../components/WeatherCard";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 function Weather() {
   const [city, setCity] = useState({ name: "", coordinates: [0, 0] });

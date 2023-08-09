@@ -1,6 +1,5 @@
 import { Dispatch, SetStateAction, useState } from "react";
 import { Check, ChevronsUpDown } from "lucide-react";
-
 import { cn } from "../lib/utils";
 import { Button } from "./ui/button";
 
@@ -41,7 +40,7 @@ function CitySelector({ city, setCity }: citySelectorProps) {
             variant="outline"
             role="combobox"
             aria-expanded={open}
-            className="w-full justify-between"
+            className="w-full justify-between border-0 rounded-lg text-sky-700 font-semibold text-md"
           >
             {city.name !== ""
               ? locations.find(
