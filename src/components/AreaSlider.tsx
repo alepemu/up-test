@@ -40,6 +40,10 @@ function AreaSlider({ location }: LocationInputProp) {
             id="dot-start"
             className="h-2 w-2 bg-sky-400 rounded-full translate-x-[2px]"
           ></div>
+          <div
+            id="dot-end"
+            className="h-2 w-2 order-last bg-sky-200 rounded-full -translate-x-[2px]"
+          ></div>
           <Slider
             value={[area]}
             onValueChange={handleArea}
@@ -47,10 +51,6 @@ function AreaSlider({ location }: LocationInputProp) {
             max={20}
             step={1}
           />
-          <div
-            id="dot-end"
-            className="h-2 w-2 bg-sky-200 rounded-full -translate-x-[2px]"
-          ></div>
         </div>
       </div>
 

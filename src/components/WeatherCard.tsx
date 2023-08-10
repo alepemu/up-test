@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Progress } from "./ui/progress";
 import { Separator } from "./ui/separator";
 import { MapPin } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 
 // interface WeatherApiResponse {
 //   cod: number;
@@ -134,10 +135,22 @@ function WeatherCard({ city }: citySelectorProps) {
           <div id="location-card" className="w-6/12">
             <p className="text-xs">LOCATION</p>
             <div className="flex items-center gap-1">
-              <MapPin size={20} className="opacity-70" />
-              <p>
-                {city.name.charAt(0).toUpperCase() + city.name.slice(1) || "-"}
-              </p>
+              <MapPin size={20} className="opacity-80" />
+              {city.name !== "" ? (
+                <>
+                  <a
+                    className="flex items-center gap-1"
+                    href={`https://www.google.com/maps/search/?api=1&query=${city.coordinates[0]}%2C${city.coordinates[1]}`}
+                    target="_blank"
+                  >
+                    {city.name.charAt(0).toUpperCase() + city.name.slice(1) ||
+                      "-"}
+                    <ExternalLink size={16} color="darkblue" />
+                  </a>
+                </>
+              ) : (
+                <p>-</p>
+              )}
             </div>
           </div>
         </div>
@@ -145,7 +158,6 @@ function WeatherCard({ city }: citySelectorProps) {
         <div id="weather-temperature" className="flex gap-4">
           <div id="temp-real" className="w-2/6">
             <p className="text-xs">TEMPERATURE</p>
-            {/* <p>{Math.round(weather.main.temp * 100) / 100}</p> */}
             <p>
               {String(Math.round(weather.main.temp * 100) / 100).replace(
                 ".",
