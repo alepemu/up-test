@@ -35,7 +35,11 @@ function AreaSlider({ location }: LocationInputProp) {
           <h4 className="text-xl font-bold">Area</h4>
           <p className="text-xs text-gray-500">{area} km ⌀ (max 20)</p>
         </div>
-        <div id="area-input" className="w-full h-8 flex">
+        <div id="area-input" className="w-full h-8 flex items-center">
+          <div
+            id="dot-start"
+            className="h-2 w-2 bg-sky-400 rounded-full translate-x-[2px]"
+          ></div>
           <Slider
             value={[area]}
             onValueChange={handleArea}
@@ -43,6 +47,10 @@ function AreaSlider({ location }: LocationInputProp) {
             max={20}
             step={1}
           />
+          <div
+            id="dot-end"
+            className="h-2 w-2 bg-sky-200 rounded-full -translate-x-[2px]"
+          ></div>
         </div>
       </div>
 
@@ -69,12 +77,12 @@ function AreaSlider({ location }: LocationInputProp) {
               pathOptions={{ color: "#38bdf8", weight: 2 }}
               radius={(area * 1000) / 2}
             />
-            <Recenter lat={location.latitude} lon={location.longitude} />
             <Rezoom
               area={area}
               lat={location.latitude}
               lon={location.longitude}
             />
+            <Recenter lat={location.latitude} lon={location.longitude} />
           </MapContainer>
         </div>
       </div>

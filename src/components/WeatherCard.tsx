@@ -145,11 +145,22 @@ function WeatherCard({ city }: citySelectorProps) {
         <div id="weather-temperature" className="flex gap-4">
           <div id="temp-real" className="w-2/6">
             <p className="text-xs">TEMPERATURE</p>
-            <p>{Math.round(weather.main.temp * 100) / 100}</p>
+            {/* <p>{Math.round(weather.main.temp * 100) / 100}</p> */}
+            <p>
+              {String(Math.round(weather.main.temp * 100) / 100).replace(
+                ".",
+                ","
+              )}
+            </p>
           </div>
           <div id="temp-feel" className="w-2/6">
             <p className="text-xs">FEELS LIKE</p>
-            <p>{Math.round(weather.main.feels_like * 100) / 100}</p>
+            <p>
+              {String(Math.round(weather.main.feels_like * 100) / 100).replace(
+                ".",
+                ","
+              )}
+            </p>
           </div>
         </div>
 

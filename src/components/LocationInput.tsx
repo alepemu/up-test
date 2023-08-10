@@ -17,7 +17,13 @@ function LocationInput({ location, setLocation }: LocationInputProps) {
     event: React.ChangeEvent<HTMLInputElement>,
     parameter: string
   ) => {
-    setLocation({ ...location, [parameter]: +event.target.value });
+    const value = +event.target.value;
+    if (
+      (parameter === "latitude" && value <= 90 && value >= -90) ||
+      (parameter === "longitude" && value <= 180 && value >= -180)
+    ) {
+      setLocation({ ...location, [parameter]: +event.target.value });
+    }
   };
 
   return (
